@@ -15,9 +15,13 @@ app.set('view engine', 'ejs'); // sets the view engine to ejs
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+let posts = [];
 
 app.get("/", function(req,res){
-  res.render("home", {startingContent: homeStartingContent}) 
+  res.render("home", { // Object with key value pairs
+    startingContent: homeStartingContent,
+    posts: posts
+  });
   // use res.render to load up an ejs view file
   // use an object with a key value pair to send the content to the home.ejs
 });
@@ -30,10 +34,18 @@ app.get("/contact", function(req,res){
   res.render("contact", {contactContent: contactContent}) 
 });
 
+app.get("/compose", function(req,res){
+  res.render("compose") 
+});
 
-
-
-
+app.post("/compose", function(req,res){
+  const new_post = {
+    title: req.body.title, 
+    content: req.body.postBody
+  };
+  posts.push(new_post)
+  res.redirect("/");
+});
 
 
 
