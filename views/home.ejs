@@ -3,8 +3,8 @@
   <p> <%= startingContent %> </p>
 
   <% posts.forEach(function(post){ %> <!-- other method would be a basic for loop -->
-    <h1><%- post.title; %></h1>
-    <p><%- post.content; %></p>
+    <a href="/posts/<%= post.title %>"><h1><%- post.title; %></h1></a>
+    <p><%- post.content.substring(0, 100) + " " %><a href="/posts/<%= post.title %>">...</a></p>
   <% }); %>
   
 <%- include("partials/footer") %>
